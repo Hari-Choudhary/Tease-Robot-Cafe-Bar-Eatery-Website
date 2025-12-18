@@ -3,32 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tease Robot Cafe, Bar & Eatery</title>
-    <meta name="description" content="Hanmer Springs' premier destination for fusion cuisine, innovative cocktails, and a futuristic dining experience.">
+    <title>Tease Robot Cafe | The Future of Dining</title>
+    <meta name="description" content="Experience the future of dining at Tease. Robotic service, fusion cuisine, and innovative cocktails in Hanmer Springs.">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Tailwind Config for Custom Fonts/Colors -->
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        serif: ['Playfair Display', 'serif'],
-                        sans: ['Lato', 'sans-serif'],
+                        'tech': ['Orbitron', 'sans-serif'],
+                        'body': ['Rajdhani', 'sans-serif'],
                     },
                     colors: {
-                        amber: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
+                        neon: {
+                            gold: '#FFD700',
+                            blue: '#00F3FF',
+                            purple: '#BC13FE',
+                        },
+                        dark: {
+                            base: '#050505',
+                            surface: '#0F1115',
+                            card: '#161B22',
                         }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1f2937 1px, transparent 1px), linear-gradient(to bottom, #1f2937 1px, transparent 1px)",
                     }
                 }
             }
@@ -37,86 +45,159 @@
 
     <style>
         body { 
-            background-color: #111; 
-            color: white; 
+            background-color: #050505; 
+            color: #e5e7eb;
+            background-image: radial-gradient(circle at 50% 50%, #111827 0%, #050505 100%);
         }
         
-        /* Custom scrollbar for a more modern look */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #222; }
-        ::-webkit-scrollbar-thumb { background: #555; }
-        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
-        
-        /* Style date input placeholder */
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(0.8) sepia(1) saturate(5) hue-rotate(350deg);
-            cursor: pointer;
+        /* Tech Grid Background */
+        .bg-tech-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(31, 41, 55, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(31, 41, 55, 0.3) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
         }
 
-        /* Nav Link Hover Effect */
-        .nav-link {
+        /* Glitch Text Effect */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: #00F3FF;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        /* Robot Animations (Simulating GIF) */
+        @keyframes blink {
+            0%, 96%, 100% { transform: scaleY(1); }
+            98% { transform: scaleY(0.1); }
+        }
+        @keyframes scan {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .robot-eye { animation: blink 4s infinite; transform-origin: center; }
+        .robot-scanner { animation: scan 2s linear infinite; }
+        .robot-antenna { animation: float 3s ease-in-out infinite; }
+        
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        
+        /* Neon Button */
+        .btn-neon {
+            background: transparent;
+            border: 1px solid #FFD700;
+            color: #FFD700;
             position: relative;
-            padding: 0.5rem 0;
-            color: #d1d5db;
-            transition: color 0.3s ease;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.2);
         }
-        .nav-link:hover {
-            color: white;
+        .btn-neon:hover {
+            background: #FFD700;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
         }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: #f59e0b;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
     </style>
 </head>
-<body class="bg-neutral-900 font-sans antialiased">
+<body class="font-body antialiased selection:bg-neon-gold selection:text-black">
 
     <!-- Navbar -->
-    <nav class="bg-black/30 backdrop-blur-md fixed w-full z-50 top-0 transition-all duration-300">
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-dark-base/80 backdrop-blur-lg border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-24">
-                <!-- Logo -->
-                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <!-- Animated Robot Logo -->
+                <div class="flex-shrink-0 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
                     <div class="flex items-center space-x-3">
-                        <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 95C74.8528 95 95 74.8528 95 50C95 25.1472 74.8528 5 50 5C25.1472 5 5 25.1472 5 50C5 74.8528 25.1472 95 50 95Z" stroke="#D4AF37" stroke-width="2"/>
-                            <circle cx="40" cy="45" r="3" fill="#D4AF37"/>
-                            <circle cx="60" cy="45" r="3" fill="#D4AF37"/>
-                            <path d="M45 65C50 70 55 65" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                            <path d="M42 35H58" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M50 35V60" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                        <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="group-hover:drop-shadow-[0_0_10px_rgba(0,243,255,0.5)] transition-all duration-300">
+                            <!-- Outer Ring -->
+                            <circle cx="50" cy="50" r="45" stroke="#333" stroke-width="2"/>
+                            <path d="M50 5C25.1472 5 5 25.1472 5 50" stroke="#00F3FF" stroke-width="2" stroke-dasharray="10 5" opacity="0.7"/>
+                            
+                            <!-- Robot Head Shape -->
+                            <rect x="25" y="30" width="50" height="45" rx="10" fill="#161B22" stroke="#FFD700" stroke-width="2"/>
+                            
+                            <!-- Antenna -->
+                            <g class="robot-antenna">
+                                <line x1="50" y1="30" x2="50" y2="15" stroke="#FFD700" stroke-width="2"/>
+                                <circle cx="50" cy="12" r="3" fill="#FF0055">
+                                    <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+                                </circle>
+                            </g>
+                            
+                            <!-- Eyes (Blinking) -->
+                            <g class="robot-eye">
+                                <circle cx="40" cy="48" r="4" fill="#00F3FF"/>
+                                <circle cx="60" cy="48" r="4" fill="#00F3FF"/>
+                            </g>
+                            
+                            <!-- Mouth -->
+                            <path d="M40 65 Q50 70 60 65" stroke="#FFD700" stroke-width="2" stroke-linecap="round"/>
+                            
+                            <!-- Scanning Beam -->
+                            <defs>
+                                <clipPath id="screen-clip">
+                                    <rect x="25" y="30" width="50" height="45" rx="10"/>
+                                </clipPath>
+                            </defs>
+                            <rect x="25" y="30" width="5" height="45" fill="url(#scan-gradient)" opacity="0.3" clip-path="url(#screen-clip)" class="robot-scanner"/>
+                            <linearGradient id="scan-gradient" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="transparent"/>
+                                <stop offset="50%" stop-color="#00F3FF"/>
+                                <stop offset="100%" stop-color="transparent"/>
+                            </linearGradient>
                         </svg>
-                        <span class="font-serif text-white text-2xl tracking-widest">TEASE</span>
+                        <div class="flex flex-col">
+                            <span class="font-tech text-white text-2xl tracking-[0.2em] leading-none">TEASE</span>
+                            <span class="font-body text-neon-blue text-xs tracking-widest uppercase opacity-80">Robotics & Dining</span>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-center space-x-8">
-                        <a href="#home" class="nav-link">Home</a>
-                        <a href="#menu" class="nav-link">Menu</a>
-                        <a href="#robots" class="nav-link">Our Robots</a>
-                        <a href="#book" class="bg-amber-600 text-white px-5 py-2 rounded-sm font-semibold hover:bg-amber-500 transition-colors duration-300">Book</a>
+                        <a href="#home" class="font-tech text-sm text-gray-400 hover:text-neon-gold transition-colors duration-300 uppercase tracking-widest glitch-hover">Home</a>
+                        <a href="#robots" class="font-tech text-sm text-gray-400 hover:text-neon-blue transition-colors duration-300 uppercase tracking-widest glitch-hover">The Tech</a>
+                        <a href="#menu" class="font-tech text-sm text-gray-400 hover:text-neon-gold transition-colors duration-300 uppercase tracking-widest glitch-hover">Menu</a>
+                        <a href="#book" class="btn-neon px-6 py-2 rounded-sm font-tech font-bold text-sm tracking-wider">INITIATE BOOKING</a>
                     </div>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="-mr-2 flex md:hidden">
-                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
-                        <span class="sr-only">Open main menu</span>
-                        <svg id="menu-icon" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-neon-gold hover:text-white focus:outline-none">
+                        <svg id="menu-icon" class="h-8 w-8 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                         </svg>
-                        <svg id="close-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg id="close-icon" class="h-8 w-8 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -125,469 +206,335 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-neutral-900 border-t border-gray-800" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center">
-                <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Home</a>
-                <a href="#menu" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Menu</a>
-                <a href="#robots" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Our Robots</a>
-                <a href="#book" onclick="toggleMobileMenu()" class="block mt-4 w-full text-center bg-amber-600 text-white px-5 py-3 rounded-sm font-semibold hover:bg-amber-500 transition-colors duration-300">Book A Table</a>
+        <div class="hidden md:hidden bg-dark-surface border-t border-gray-800 absolute w-full" id="mobile-menu">
+            <div class="px-4 pt-4 pb-6 space-y-4 flex flex-col items-center">
+                <a href="#home" onclick="toggleMobileMenu()" class="block font-tech text-lg text-gray-300 hover:text-neon-gold">HOME</a>
+                <a href="#robots" onclick="toggleMobileMenu()" class="block font-tech text-lg text-gray-300 hover:text-neon-blue">THE TECH</a>
+                <a href="#menu" onclick="toggleMobileMenu()" class="block font-tech text-lg text-gray-300 hover:text-neon-gold">MENU</a>
+                <a href="#book" onclick="toggleMobileMenu()" class="block w-full text-center bg-neon-gold/10 border border-neon-gold text-neon-gold px-5 py-3 rounded-sm font-tech font-bold hover:bg-neon-gold hover:text-black transition-colors">INITIATE BOOKING</a>
             </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main>
-        <!-- Header / Hero Section -->
+        <!-- Hero Section -->
         <div id="home" class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
-            <div class="absolute inset-0 bg-black/60 z-10"></div>
-            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" 
-                 alt="Elegant restaurant interior" 
-                 class="absolute inset-0 w-full h-full object-cover z-0"
-                 onerror="this.style.display='none'">
-            <div class="relative z-20 p-4 animate-fade-in-up">
-                <h2 class="font-serif text-2xl md:text-3xl tracking-wider text-amber-500 mb-4">EAT. DRINK. SOCIALISE.</h2>
-                <h1 class="text-5xl md:text-8xl font-serif font-bold mb-8">Tease Robot Cafe, Bar & Eatery</h1>
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-200 mb-10">
-                    Hanmer Springs' premier destination for fusion cuisine, innovative cocktails, and a futuristic dining experience.
+            <!-- Background Image -->
+            <div class="absolute inset-0 bg-dark-base z-0">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" 
+                     alt="Restaurant Background" 
+                     class="w-full h-full object-cover opacity-40">
+                <!-- Tech Overlay -->
+                <div class="absolute inset-0 bg-tech-grid opacity-50"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-dark-base via-transparent to-dark-base"></div>
+            </div>
+            
+            <div class="relative z-20 p-4 max-w-5xl mx-auto">
+                <div class="mb-6 inline-block border border-neon-blue/30 bg-black/50 backdrop-blur px-4 py-1 rounded-full">
+                    <span class="text-neon-blue font-tech text-xs tracking-[0.3em] uppercase animate-pulse">● System Online</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-tech font-bold mb-6 text-white leading-tight">
+                    DINING <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-gold to-orange-500">RECODED</span>
+                </h1>
+                <p class="max-w-2xl mx-auto text-xl md:text-2xl text-gray-300 mb-10 font-body font-light tracking-wide">
+                    Hanmer Springs' first automated culinary experience. Where artisan cuisine meets robotic precision.
                 </p>
-                <a href="#menu" class="bg-amber-600 text-white font-semibold py-3 px-8 rounded-sm hover:bg-amber-500 transition-colors duration-300 text-lg inline-block">
-                    Explore The Menu
-                </a>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#menu" class="btn-neon px-10 py-4 text-lg font-tech tracking-wider uppercase">
+                        View Database
+                    </a>
+                    <a href="#robots" class="px-10 py-4 text-lg font-tech tracking-wider uppercase text-white hover:text-neon-blue transition-colors relative group">
+                        Meet The Bots
+                        <span class="absolute bottom-2 left-1/2 w-0 h-0.5 bg-neon-blue group-hover:w-full group-hover:left-0 transition-all duration-300"></span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- About Section -->
-        <section id="about" class="py-24 px-4 bg-neutral-900 text-white">
-            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-6">
-                    <h2 class="font-serif text-5xl font-bold text-amber-500">Our Story, Reimagined</h2>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Nestled in the heart of Hanmer Springs, Tease has always been more than just a place to eat and drink. It’s a place where good food and good company come together. Now, we’ve infused this tradition with a vision of the future.
-                    </p>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Introducing Hanmer Springs’ first robotic dining service. Our state-of-the-art Cadebot waiters and Robot Anno barista work in harmony with our human team to provide an experience that is both flawlessly efficient and wonderfully unique. We blend the best of Asian and Kiwi flavours, creating a menu that is both familiar and exciting.
-                    </p>
-                    <p class="font-semibold text-amber-400 text-lg">Join us for a taste of tomorrow, today.</p>
+        <!-- Robot Section (Moved Up & Redesigned) -->
+        <section id="robots" class="py-24 px-4 bg-dark-surface relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-neon-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-neon-gold/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-tech text-4xl md:text-6xl font-bold text-white mb-4">AUTOMATED <span class="text-neon-blue">STAFF</span></h2>
+                    <div class="h-1 w-24 bg-neon-blue mx-auto rounded-full"></div>
+                    <p class="text-gray-400 text-xl mt-6 max-w-2xl mx-auto font-body">Efficiency meets personality. Our autonomous fleet ensures your experience is seamless from sip to bite.</p>
                 </div>
-                <div class="rounded-sm overflow-hidden shadow-2xl shadow-amber-500/10 h-96">
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Cadebot Card -->
+                    <div class="glass-panel p-1 rounded-2xl group hover:border-neon-gold/50 transition-all duration-500">
+                        <div class="relative overflow-hidden rounded-xl h-80">
+                            <img src="https://storage.googleapis.com/maker-studio-project-media-prod/1719505213197/images/image.png" 
+                                 alt="Cadebot" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                                 onerror="this.src='https://placehold.co/600x400/161B22/00F3FF?text=Unit:+Cadebot'">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 pt-20">
+                                <h3 class="font-tech text-3xl font-bold text-neon-gold mb-1">UNIT: CADEBOT</h3>
+                                <p class="text-neon-blue font-tech text-sm tracking-widest uppercase">Floor Navigation Specialist</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 leading-relaxed text-lg">Gliding through the floor with LiDAR precision, Cadebot delivers meals with zero spillage and 100% charm. A captivating display of functional robotics.</p>
+                        </div>
+                    </div>
+
+                    <!-- Anno Card -->
+                    <div class="glass-panel p-1 rounded-2xl group hover:border-neon-blue/50 transition-all duration-500">
+                        <div class="relative overflow-hidden rounded-xl h-80">
+                            <img src="https://placehold.co/800x600/161B22/FFD700?text=Unit:+Anno+Barista" 
+                                 alt="Robot Anno" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6 pt-20">
+                                <h3 class="font-tech text-3xl font-bold text-neon-blue mb-1">UNIT: ANNO</h3>
+                                <p class="text-neon-gold font-tech text-sm tracking-widest uppercase">Precision Barista Arm</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 leading-relaxed text-lg">Engineered for the perfect extraction. Anno measures temperature, pressure, and timing to craft artisan coffee that rivals the best human baristas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-20 px-4 bg-black relative border-y border-white/5">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-neon-gold font-tech text-sm uppercase tracking-widest">About The Establishment</span>
+                        <h2 class="font-tech text-4xl md:text-5xl font-bold text-white mt-2">TRADITION <br/> UPGRADED</h2>
+                    </div>
+                    <p class="text-gray-400 text-lg leading-relaxed font-body">
+                        Nestled in Hanmer Springs, Tease blends the warmth of traditional hospitality with the efficiency of tomorrow. We aren't just a restaurant; we are a laboratory of flavors and technology.
+                    </p>
+                    <ul class="space-y-4 font-tech text-sm tracking-wide text-gray-300">
+                        <li class="flex items-center"><span class="w-2 h-2 bg-neon-blue mr-3 rounded-full"></span> FUSION CUISINE</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-neon-blue mr-3 rounded-full"></span> AUTONOMOUS SERVICE</li>
+                        <li class="flex items-center"><span class="w-2 h-2 bg-neon-blue mr-3 rounded-full"></span> INNOVATIVE COCKTAILS</li>
+                    </ul>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-neon-gold blur-[100px] opacity-10"></div>
                     <img src="https://storage.googleapis.com/maker-studio-project-media-prod/1719505221975/images/image.png" 
-                         alt="Cadebot the robot waiter at the bar" 
-                         class="w-full h-full object-cover"
-                         onerror="this.src='https://placehold.co/600x400/1a1a1a/D4AF37?text=Tease+Bar'">
+                         class="relative rounded-lg border border-white/10 shadow-2xl z-10 grayscale hover:grayscale-0 transition-all duration-500"
+                         alt="Atmosphere"
+                         onerror="this.src='https://placehold.co/600x400/161B22/333?text=Interior+Atmosphere'">
                 </div>
             </div>
         </section>
 
         <!-- Menu Section -->
-        <div id="menu" class="py-24 px-4 bg-black">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="font-serif text-5xl font-bold text-white mb-16">Our Menu</h2>
+        <div id="menu" class="py-24 px-4 bg-dark-base relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="font-tech text-5xl font-bold text-white mb-4">EDIBLE <span class="text-neon-gold">DATA</span></h2>
+                    <p class="text-gray-500 font-tech uppercase tracking-widest">Processing Flavors...</p>
+                </div>
                 
-                <!-- Cafe -->
-                <div class="mb-12 text-left">
-                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Cafe</h3>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Robot-Perfect Latte</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$6</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Espresso with perfectly textured milk and optional latte art by Robot Anno.</p>
+                <!-- Menu Category -->
+                <div class="mb-16">
+                    <div class="flex items-center mb-8">
+                        <div class="h-px bg-neon-blue/30 flex-grow"></div>
+                        <h3 class="mx-6 font-tech text-2xl text-neon-blue uppercase tracking-widest">Core Systems (Mains)</h3>
+                        <div class="h-px bg-neon-blue/30 flex-grow"></div>
                     </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Miso Scrambled Eggs</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$24</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Menu Item -->
+                        <div class="bg-dark-card border border-white/5 p-6 rounded-lg hover:border-neon-gold/30 transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-tech text-xl text-white group-hover:text-neon-gold transition-colors">Market Fish</h4>
+                                <span class="font-tech text-neon-blue text-lg">$39</span>
+                            </div>
+                            <p class="text-gray-400 font-body text-lg">Daily catch analysis. Ask staff for specs.</p>
                         </div>
-                        <p class="text-gray-400 mt-1">Creamy scrambled eggs with a hint of miso, served on toasted brioche with furikake seasoning.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Ube Hotcakes</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$25</p>
+                         <!-- Menu Item -->
+                        <div class="bg-dark-card border border-white/5 p-6 rounded-lg hover:border-neon-gold/30 transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-tech text-xl text-white group-hover:text-neon-gold transition-colors">250g Sirloin</h4>
+                                <span class="font-tech text-neon-blue text-lg">$42</span>
+                            </div>
+                            <p class="text-gray-400 font-body text-lg">Precision cooked. Fries, salad, garlic butter or mushroom sauce.</p>
                         </div>
-                        <p class="text-gray-400 mt-1">Fluffy purple yam hotcakes with coconut cream, fresh berries, and maple syrup.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Bacon & Egg Buttie</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$15</p>
+                        <!-- Menu Item -->
+                        <div class="bg-dark-card border border-white/5 p-6 rounded-lg hover:border-neon-gold/30 transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-tech text-xl text-white group-hover:text-neon-gold transition-colors">The Tease Burger</h4>
+                                <span class="font-tech text-neon-blue text-lg">$28</span>
+                            </div>
+                            <p class="text-gray-400 font-body text-lg">Beef patty, bacon, cheese, pickles, aioli, fries.</p>
                         </div>
-                        <p class="text-gray-400 mt-1">Smokey bacon and a fried egg in a soft roll with your choice of sauce.</p>
+                         <!-- Menu Item -->
+                        <div class="bg-dark-card border border-white/5 p-6 rounded-lg hover:border-neon-gold/30 transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-tech text-xl text-white group-hover:text-neon-gold transition-colors">Fried Chicken</h4>
+                                <span class="font-tech text-neon-blue text-lg">$26</span>
+                            </div>
+                            <p class="text-gray-400 font-body text-lg">Buttermilk fried, gravy & fries.</p>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Small Plates -->
-                <div class="mb-12 text-left">
-                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Small Plates / To Share</h3>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">KFC</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$19</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Crispy fried cauliflower with Korean spices, peanuts & aioli.</p>
+                <div class="mb-16">
+                    <div class="flex items-center mb-8">
+                        <div class="h-px bg-neon-gold/30 flex-grow"></div>
+                        <h3 class="mx-6 font-tech text-2xl text-neon-gold uppercase tracking-widest">Micro Chips (Small Plates)</h3>
+                        <div class="h-px bg-neon-gold/30 flex-grow"></div>
                     </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Duck Spring Rolls</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$21</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                         <div class="bg-dark-card border border-white/5 p-6 rounded-lg hover:border-neon-blue/30 transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-tech text-xl text-white group-hover:text-neon-blue transition-colors">KFC (Korean Fried Cauli)</h4>
+                                <span class="font-tech text-neon-gold text-lg">$19</span>
+                            </div>
+                            <p class="text-gray-400 font-body text-lg">Spices, peanuts, aioli.</p>
                         </div>
-                        <p class="text-gray-400 mt-1">With plum sauce.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Pork Belly Bites</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$22</p>
+                        <div class="bg-dark-card border border-white/5 p-6 rounded-lg hover:border-neon-blue/30 transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-tech text-xl text-white group-hover:text-neon-blue transition-colors">Pork Belly Bites</h4>
+                                <span class="font-tech text-neon-gold text-lg">$22</span>
+                            </div>
+                            <p class="text-gray-400 font-body text-lg">Sweet chili sauce, Asian slaw.</p>
                         </div>
-                        <p class="text-gray-400 mt-1">With sweet chili sauce & Asian slaw.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Lamb Kofta</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$22</p>
+                         <div class="bg-dark-card border border-white/5 p-6 rounded-lg hover:border-neon-blue/30 transition-colors group">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-tech text-xl text-white group-hover:text-neon-blue transition-colors">Duck Spring Rolls</h4>
+                                <span class="font-tech text-neon-gold text-lg">$21</span>
+                            </div>
+                            <p class="text-gray-400 font-body text-lg">Plum sauce integration.</p>
                         </div>
-                        <p class="text-gray-400 mt-1">With garlic yogurt & hummus.</p>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Crispy Prawns</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$23</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">With sweet chili sauce & aioli.</p>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Garlic Bread</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$15</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Add cheese +4</p>
                     </div>
                 </div>
-
-                <!-- Large Plates -->
-                <div class="mb-12 text-left">
-                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Large Plates</h3>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Fried Chicken</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$26</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Buttermilk fried chicken with gravy & fries.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Bao Buns (3)</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$26</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Pork belly, crispy chicken or tofu with hoisin, pickled cucumber, crispy shallots & peanuts.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Market Fish</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$39</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Ask our friendly staff for today’s special.</p>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">250g Sirloin</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$42</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Cooked to your liking with fries, salad & your choice of garlic butter or mushroom sauce.</p>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">The Tease Burger</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$28</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Beef patty, bacon, cheese, lettuce, tomato, pickles & aioli with fries.</p>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Vege Burger</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$28</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Black bean patty, cheese, lettuce, tomato, pickles & aioli with fries.</p>
-                    </div>
-                </div>
-
-                <!-- Sides -->
-                <div class="mb-12 text-left">
-                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Sides</h3>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Fries</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$11</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">With aioli.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Dressed Salad</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$11</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Mixed greens with house vinaigrette.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Seasonal Vegetables</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$12</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Steamed or roasted to perfection.</p>
-                    </div>
-                </div>
-
-                <!-- Desserts -->
-                <div class="mb-12 text-left">
-                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Desserts</h3>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Sticky Date Pudding</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$17</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">With caramel sauce & vanilla ice cream.</p>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Chocolate Brownie</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$17</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">With chocolate sauce & vanilla ice cream.</p>
-                    </div>
-                </div>
-
-                <!-- Kids Menu -->
-                <div class="mb-12 text-left">
-                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Kids Menu</h3>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Mini Hotdogs & Fries</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$15</p>
-                        </div>
-                    </div>
-                    <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Chicken Nuggets & Fries</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$15</p>
-                        </div>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Fishbites & Fries</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$15</p>
-                        </div>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Mini Pizzas</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$15</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">Ham & Pineapple or Cheese</p>
-                    </div>
-                     <div class="py-4">
-                        <div class="flex justify-between items-baseline">
-                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Ice Cream Sundae</h3>
-                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
-                            <p class="text-xl font-semibold text-white">$10</p>
-                        </div>
-                        <p class="text-gray-400 mt-1">With your choice of chocolate, strawberry or caramel sauce.</p>
-                    </div>
-                </div>
-
             </div>
         </div>
 
-        <!-- Robot Section -->
-        <section id="robots" class="py-24 px-4 bg-neutral-900">
-            <div class="max-w-7xl mx-auto text-center text-white">
-                <h2 class="font-serif text-5xl font-bold text-amber-500 mb-6">The Future of Service</h2>
-                <p class="text-gray-300 text-lg mb-16 max-w-3xl mx-auto">Experience hospitality innovation firsthand. Our robotic team complements our talented staff to deliver a memorable and seamless dining experience.</p>
-                
-                <div class="grid md:grid-cols-2 gap-12 items-start text-left">
-                    <div class="bg-neutral-800/50 p-8 rounded-sm">
-                        <div class="h-96 w-full mb-6">
-                            <img src="https://storage.googleapis.com/maker-studio-project-media-prod/1719505213197/images/image.png" 
-                                 alt="Cadebot the waiter in the dining area" 
-                                 class="rounded-sm w-full h-full object-cover"
-                                 onerror="this.src='https://placehold.co/600x400/1a1a1a/D4AF37?text=Cadebot'">
-                        </div>
-                        <h3 class="font-serif text-3xl font-bold text-amber-500 mb-2">Cadebot</h3>
-                        <p class="text-lg font-semibold text-white mb-4">Precision and Grace</p>
-                        <p class="text-gray-300 leading-relaxed">Our Cadebot waiters glide through the restaurant, delivering your meals with futuristic precision. It’s a captivating display of technology that adds a touch of magic to your meal.</p>
-                    </div>
-                    <div class="bg-neutral-800/50 p-8 rounded-sm">
-                        <div class="h-96 w-full mb-6">
-                             <img src="https://placehold.co/800x600/1a1a1a/D4AF37?text=Robot+Anno+Barista" 
-                                  alt="Robot Anno the barista machine" 
-                                  class="rounded-sm w-full h-full object-cover" 
-                                  onerror="this.src='https://placehold.co/600x400/1a1a1a/D4AF37?text=Robot+Anno'">
-                        </div>
-                        <h3 class="font-serif text-3xl font-bold text-amber-500 mb-2">Robot Anno</h3>
-                        <p class="text-lg font-semibold text-white mb-4">The Artisan Barista</p>
-                        <p class="text-gray-300 leading-relaxed">Begin your day with a masterpiece. Our Robot Anno barista crafts the perfect coffee, from grinding the beans to creating intricate latte art, ensuring excellence in every cup.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Reservations Section -->
-        <div id="book" class="py-24 px-4 bg-black">
-            <!-- Success Message (Hidden by default) -->
-            <div id="success-message" class="hidden flex items-center justify-center">
-                <div class="max-w-lg mx-auto text-center bg-neutral-900 p-12 rounded-sm">
-                    <h2 class="font-serif text-4xl font-bold text-amber-500 mb-4">Thank You!</h2>
-                    <p class="text-white text-lg">Your booking request has been received. We will contact you shortly to confirm.</p>
-                    <button onclick="resetForm()" class="mt-8 bg-amber-600 text-white font-semibold py-3 px-8 rounded-sm hover:bg-amber-500 transition-colors duration-300">
-                        Make Another Booking
-                    </button>
-                </div>
-            </div>
-
-            <!-- Booking Form -->
-            <div id="booking-form-container" class="max-w-lg mx-auto bg-neutral-900 p-10 rounded-sm shadow-2xl">
-                <h2 class="font-serif text-5xl font-bold text-white text-center mb-8">Book A Table</h2>
-                <form onsubmit="handleBooking(event)" class="space-y-6">
-                     <div>
-                        <label htmlFor="name" class="block text-sm font-medium text-amber-400">Full Name</label>
-                        <input type="text" name="name" id="name" required class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                     <div>
-                        <label htmlFor="phone" class="block text-sm font-medium text-amber-400">Phone</label>
-                        <input type="tel" name="phone" id="phone" required class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
-                    </div>
-                     <div class="grid grid-cols-2 gap-6">
-                         <div>
-                            <label htmlFor="guests" class="block text-sm font-medium text-amber-400">Guests</label>
-                            <select name="guests" id="guests" class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
-                               <option>1 guest</option>
-                               <option selected>2 guests</option>
-                               <option>3 guests</option>
-                               <option>4 guests</option>
-                               <option>5 guests</option>
-                               <option>6 guests</option>
-                               <option>7 guests</option>
-                               <option>8 guests</option>
-                               <option>9 guests</option>
-                               <option>10 guests</option>
-                            </select>
-                        </div>
-                         <div>
-                            <label htmlFor="date" class="block text-sm font-medium text-amber-400">Date</label>
-                            <input type="date" name="date" id="date" required class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
-                        </div>
-                     </div>
-                     <div>
-                        <label htmlFor="time" class="block text-sm font-medium text-amber-400">Time</label>
-                         <select name="time" id="time" class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
-                             <option>5:00 PM</option>
-                             <option>5:30 PM</option>
-                             <option selected>6:00 PM</option>
-                             <option>6:30 PM</option>
-                             <option>7:00 PM</option>
-                             <option>7:30 PM</option>
-                             <option>8:00 PM</option>
-                             <option>8:30 PM</option>
-                         </select>
-                     </div>
-                     <div>
-                        <button type="submit" class="w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-sm hover:bg-amber-500 transition-colors duration-300 text-lg">
-                            Request Booking
+        <div id="book" class="py-24 px-4 bg-dark-surface relative overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 bg-tech-grid opacity-30"></div>
+            
+            <div class="max-w-xl mx-auto relative z-10">
+                <div class="glass-panel p-10 rounded-2xl shadow-2xl border-t border-neon-gold/20">
+                    
+                    <!-- Success Message -->
+                    <div id="success-message" class="hidden text-center py-10">
+                        <svg class="w-20 h-20 text-neon-gold mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <h2 class="font-tech text-3xl font-bold text-white mb-2">TRANSMISSION RECEIVED</h2>
+                        <p class="text-gray-400 mb-8">We are processing your request. Stand by for confirmation.</p>
+                        <button onclick="resetForm()" class="btn-neon w-full py-3 font-tech uppercase tracking-widest">
+                            Input New Data
                         </button>
-                     </div>
-                </form>
+                    </div>
+
+                    <!-- Form -->
+                    <div id="booking-form-container">
+                        <div class="text-center mb-8">
+                            <h2 class="font-tech text-4xl font-bold text-white mb-2">RESERVE A POD</h2>
+                            <p class="text-neon-blue font-tech text-xs tracking-[0.3em] uppercase">Secure Your Timeslot</p>
+                        </div>
+                        
+                        <form onsubmit="handleBooking(event)" class="space-y-6">
+                            <div class="space-y-1">
+                                <label class="text-xs font-tech text-gray-500 uppercase tracking-wider ml-1">Identity</label>
+                                <input type="text" placeholder="Full Name" required 
+                                    class="w-full bg-black/50 border border-gray-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-neon-gold focus:ring-1 focus:ring-neon-gold transition-all font-body">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs font-tech text-gray-500 uppercase tracking-wider ml-1">Comms</label>
+                                <input type="tel" placeholder="Phone Number" required 
+                                    class="w-full bg-black/50 border border-gray-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-neon-gold focus:ring-1 focus:ring-neon-gold transition-all font-body">
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-1">
+                                    <label class="text-xs font-tech text-gray-500 uppercase tracking-wider ml-1">Units</label>
+                                    <select class="w-full bg-black/50 border border-gray-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-neon-gold transition-all font-body appearance-none">
+                                        <option>2 Units</option>
+                                        <option>3 Units</option>
+                                        <option>4 Units</option>
+                                        <option>5+ Units</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-xs font-tech text-gray-500 uppercase tracking-wider ml-1">Timestamp</label>
+                                    <input type="date" id="date" required 
+                                        class="w-full bg-black/50 border border-gray-700 rounded-sm px-4 py-3 text-white focus:outline-none focus:border-neon-gold transition-all font-body">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full bg-neon-gold text-black font-tech font-bold text-lg py-4 rounded-sm hover:bg-white hover:shadow-[0_0_20px_rgba(255,215,0,0.5)] transition-all duration-300 uppercase tracking-widest mt-4">
+                                Confirm Transmission
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black border-t-2 border-amber-500/20">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <div class="flex justify-center mb-6">
-                <!-- SVG Logo -->
-                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 95C74.8528 95 95 74.8528 95 50C95 25.1472 74.8528 5 50 5C25.1472 5 5 25.1472 5 50C5 74.8528 25.1472 95 50 95Z" stroke="#D4AF37" stroke-width="2"/>
-                    <circle cx="40" cy="45" r="3" fill="#D4AF37"/>
-                    <circle cx="60" cy="45" r="3" fill="#D4AF37"/>
-                    <path d="M45 65C50 70 55 65" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <path d="M42 35H58" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M50 35V60" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+    <footer class="bg-black border-t border-white/10 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <!-- Footer Logo -->
+            <div class="flex justify-center mb-8 opacity-50 hover:opacity-100 transition-opacity duration-500">
+                 <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="25" y="30" width="50" height="45" rx="10" stroke="#FFD700" stroke-width="2"/>
+                    <circle cx="40" cy="48" r="4" fill="#333"/>
+                    <circle cx="60" cy="48" r="4" fill="#333"/>
+                    <path d="M40 65 Q50 70 60 65" stroke="#FFD700" stroke-width="2"/>
                 </svg>
             </div>
-            <p class="font-serif text-3xl text-white mb-4">Tease Robot Cafe, Bar & Eatery</p>
-            <p class="text-lg">Shop 5, 20 Conical Hill Road, Hanmer Springs</p>
-            <p class="text-lg mb-6">Phone: <a href="tel:03-315-7032" class="hover:text-amber-500">03-315 7032</a></p>
-            <div class="mb-6">
-                <p class="font-bold text-amber-400 text-lg">Hours</p>
-                <p>Cafe: 9am - 3pm</p>
-                <p>Lunch: 11am - 3pm</p>
-                <p>Dinner: 5pm - Late</p>
+            
+            <h3 class="font-tech text-2xl text-white mb-2 tracking-widest">TEASE</h3>
+            <p class="text-gray-500 font-body mb-8">20 Conical Hill Road, Hanmer Springs</p>
+            
+            <div class="flex justify-center gap-8 mb-12">
+                <div class="text-right border-r border-gray-800 pr-8">
+                    <p class="text-neon-blue font-tech text-sm uppercase">Power On</p>
+                    <p class="text-gray-400 font-body">09:00 - Late</p>
+                </div>
+                <div class="text-left pl-0">
+                    <p class="text-neon-blue font-tech text-sm uppercase">Contact</p>
+                    <p class="text-gray-400 font-body">03-315 7032</p>
+                </div>
             </div>
-            <p class="mt-10 text-sm" id="copyright"></p>
+            
+            <p class="text-gray-700 text-sm font-tech uppercase tracking-widest" id="copyright"></p>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script>
-        // Set dynamic year
-        document.getElementById('copyright').innerHTML = `&copy; ${new Date().getFullYear()} Tease Robot Cafe, Bar & Eatery. All Rights Reserved.`;
-
-        // Set Date input min attribute to today
+        document.getElementById('copyright').innerHTML = `&copy; ${new Date().getFullYear()} Tease Robot Cafe. System Active.`;
         document.getElementById('date').min = new Date().toISOString().split('T')[0];
 
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             const menuIcon = document.getElementById('menu-icon');
             const closeIcon = document.getElementById('close-icon');
-            
             menu.classList.toggle('hidden');
             menuIcon.classList.toggle('hidden');
             closeIcon.classList.toggle('hidden');
         }
 
-        // Handle Booking Form (Client-Side Simulation)
         function handleBooking(e) {
             e.preventDefault();
-            const formContainer = document.getElementById('booking-form-container');
-            const successMessage = document.getElementById('success-message');
-            
-            formContainer.classList.add('hidden');
-            successMessage.classList.remove('hidden');
+            document.getElementById('booking-form-container').classList.add('hidden');
+            document.getElementById('success-message').classList.remove('hidden');
         }
 
         function resetForm() {
-            const formContainer = document.getElementById('booking-form-container');
-            const successMessage = document.getElementById('success-message');
-            
-            // Reset the actual form fields
             document.querySelector('form').reset();
-            
-            successMessage.classList.add('hidden');
-            formContainer.classList.remove('hidden');
+            document.getElementById('success-message').classList.add('hidden');
+            document.getElementById('booking-form-container').classList.remove('hidden');
         }
     </script>
 </body>
