@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tease Robot Cafe, Bar & Eatery</title>
+    <meta name="description" content="Hanmer Springs' premier destination for fusion cuisine, innovative cocktails, and a futuristic dining experience.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config for Custom Fonts/Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Lato', 'sans-serif'],
+                    },
+                    colors: {
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background-color: #111; 
+            color: white; 
+        }
+        
+        /* Custom scrollbar for a more modern look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #222; }
+        ::-webkit-scrollbar-thumb { background: #555; }
+        ::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
+        
+        /* Style date input placeholder */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.8) sepia(1) saturate(5) hue-rotate(350deg);
+            cursor: pointer;
+        }
+
+        /* Nav Link Hover Effect */
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 0;
+            color: #d1d5db;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: white;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #f59e0b;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-neutral-900 font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="bg-black/30 backdrop-blur-md fixed w-full z-50 top-0 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-24">
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                    <div class="flex items-center space-x-3">
+                        <svg width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M50 95C74.8528 95 95 74.8528 95 50C95 25.1472 74.8528 5 50 5C25.1472 5 5 25.1472 5 50C5 74.8528 25.1472 95 50 95Z" stroke="#D4AF37" stroke-width="2"/>
+                            <circle cx="40" cy="45" r="3" fill="#D4AF37"/>
+                            <circle cx="60" cy="45" r="3" fill="#D4AF37"/>
+                            <path d="M45 65C50 70 55 65" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            <path d="M42 35H58" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M50 35V60" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span class="font-serif text-white text-2xl tracking-widest">TEASE</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#home" class="nav-link">Home</a>
+                        <a href="#menu" class="nav-link">Menu</a>
+                        <a href="#robots" class="nav-link">Our Robots</a>
+                        <a href="#book" class="bg-amber-600 text-white px-5 py-2 rounded-sm font-semibold hover:bg-amber-500 transition-colors duration-300">Book</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg id="menu-icon" class="h-6 w-6 block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <svg id="close-icon" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="hidden md:hidden bg-neutral-900 border-t border-gray-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center">
+                <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Home</a>
+                <a href="#menu" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Menu</a>
+                <a href="#robots" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700">Our Robots</a>
+                <a href="#book" onclick="toggleMobileMenu()" class="block mt-4 w-full text-center bg-amber-600 text-white px-5 py-3 rounded-sm font-semibold hover:bg-amber-500 transition-colors duration-300">Book A Table</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Header / Hero Section -->
+        <div id="home" class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+            <div class="absolute inset-0 bg-black/60 z-10"></div>
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80" 
+                 alt="Elegant restaurant interior" 
+                 class="absolute inset-0 w-full h-full object-cover z-0"
+                 onerror="this.style.display='none'">
+            <div class="relative z-20 p-4 animate-fade-in-up">
+                <h2 class="font-serif text-2xl md:text-3xl tracking-wider text-amber-500 mb-4">EAT. DRINK. SOCIALISE.</h2>
+                <h1 class="text-5xl md:text-8xl font-serif font-bold mb-8">Tease Robot Cafe, Bar & Eatery</h1>
+                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-200 mb-10">
+                    Hanmer Springs' premier destination for fusion cuisine, innovative cocktails, and a futuristic dining experience.
+                </p>
+                <a href="#menu" class="bg-amber-600 text-white font-semibold py-3 px-8 rounded-sm hover:bg-amber-500 transition-colors duration-300 text-lg inline-block">
+                    Explore The Menu
+                </a>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 px-4 bg-neutral-900 text-white">
+            <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-6">
+                    <h2 class="font-serif text-5xl font-bold text-amber-500">Our Story, Reimagined</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Nestled in the heart of Hanmer Springs, Tease has always been more than just a place to eat and drink. It’s a place where good food and good company come together. Now, we’ve infused this tradition with a vision of the future.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Introducing Hanmer Springs’ first robotic dining service. Our state-of-the-art Cadebot waiters and Robot Anno barista work in harmony with our human team to provide an experience that is both flawlessly efficient and wonderfully unique. We blend the best of Asian and Kiwi flavours, creating a menu that is both familiar and exciting.
+                    </p>
+                    <p class="font-semibold text-amber-400 text-lg">Join us for a taste of tomorrow, today.</p>
+                </div>
+                <div class="rounded-sm overflow-hidden shadow-2xl shadow-amber-500/10 h-96">
+                    <img src="https://storage.googleapis.com/maker-studio-project-media-prod/1719505221975/images/image.png" 
+                         alt="Cadebot the robot waiter at the bar" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='https://placehold.co/600x400/1a1a1a/D4AF37?text=Tease+Bar'">
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <div id="menu" class="py-24 px-4 bg-black">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-serif text-5xl font-bold text-white mb-16">Our Menu</h2>
+                
+                <!-- Cafe -->
+                <div class="mb-12 text-left">
+                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Cafe</h3>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Robot-Perfect Latte</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$6</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Espresso with perfectly textured milk and optional latte art by Robot Anno.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Miso Scrambled Eggs</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$24</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Creamy scrambled eggs with a hint of miso, served on toasted brioche with furikake seasoning.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Ube Hotcakes</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$25</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Fluffy purple yam hotcakes with coconut cream, fresh berries, and maple syrup.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Bacon & Egg Buttie</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$15</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Smokey bacon and a fried egg in a soft roll with your choice of sauce.</p>
+                    </div>
+                </div>
+
+                <!-- Small Plates -->
+                <div class="mb-12 text-left">
+                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Small Plates / To Share</h3>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">KFC</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$19</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Crispy fried cauliflower with Korean spices, peanuts & aioli.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Duck Spring Rolls</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$21</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With plum sauce.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Pork Belly Bites</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$22</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With sweet chili sauce & Asian slaw.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Lamb Kofta</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$22</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With garlic yogurt & hummus.</p>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Crispy Prawns</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$23</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With sweet chili sauce & aioli.</p>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Garlic Bread</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$15</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Add cheese +4</p>
+                    </div>
+                </div>
+
+                <!-- Large Plates -->
+                <div class="mb-12 text-left">
+                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Large Plates</h3>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Fried Chicken</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$26</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Buttermilk fried chicken with gravy & fries.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Bao Buns (3)</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$26</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Pork belly, crispy chicken or tofu with hoisin, pickled cucumber, crispy shallots & peanuts.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Market Fish</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$39</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Ask our friendly staff for today’s special.</p>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">250g Sirloin</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$42</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Cooked to your liking with fries, salad & your choice of garlic butter or mushroom sauce.</p>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">The Tease Burger</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$28</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Beef patty, bacon, cheese, lettuce, tomato, pickles & aioli with fries.</p>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Vege Burger</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$28</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Black bean patty, cheese, lettuce, tomato, pickles & aioli with fries.</p>
+                    </div>
+                </div>
+
+                <!-- Sides -->
+                <div class="mb-12 text-left">
+                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Sides</h3>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Fries</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$11</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With aioli.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Dressed Salad</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$11</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Mixed greens with house vinaigrette.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Seasonal Vegetables</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$12</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Steamed or roasted to perfection.</p>
+                    </div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="mb-12 text-left">
+                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Desserts</h3>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Sticky Date Pudding</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$17</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With caramel sauce & vanilla ice cream.</p>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Chocolate Brownie</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$17</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With chocolate sauce & vanilla ice cream.</p>
+                    </div>
+                </div>
+
+                <!-- Kids Menu -->
+                <div class="mb-12 text-left">
+                    <h3 class="font-serif text-3xl text-amber-500 border-b-2 border-amber-500/30 pb-2 mb-6 capitalize">Kids Menu</h3>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Mini Hotdogs & Fries</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$15</p>
+                        </div>
+                    </div>
+                    <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Chicken Nuggets & Fries</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$15</p>
+                        </div>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Fishbites & Fries</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$15</p>
+                        </div>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Mini Pizzas</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$15</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">Ham & Pineapple or Cheese</p>
+                    </div>
+                     <div class="py-4">
+                        <div class="flex justify-between items-baseline">
+                            <h3 class="font-serif text-xl font-bold text-amber-500 uppercase tracking-wider">Ice Cream Sundae</h3>
+                            <div class="flex-grow border-b-2 border-dotted border-neutral-600 mx-4"></div>
+                            <p class="text-xl font-semibold text-white">$10</p>
+                        </div>
+                        <p class="text-gray-400 mt-1">With your choice of chocolate, strawberry or caramel sauce.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Robot Section -->
+        <section id="robots" class="py-24 px-4 bg-neutral-900">
+            <div class="max-w-7xl mx-auto text-center text-white">
+                <h2 class="font-serif text-5xl font-bold text-amber-500 mb-6">The Future of Service</h2>
+                <p class="text-gray-300 text-lg mb-16 max-w-3xl mx-auto">Experience hospitality innovation firsthand. Our robotic team complements our talented staff to deliver a memorable and seamless dining experience.</p>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-start text-left">
+                    <div class="bg-neutral-800/50 p-8 rounded-sm">
+                        <div class="h-96 w-full mb-6">
+                            <img src="https://storage.googleapis.com/maker-studio-project-media-prod/1719505213197/images/image.png" 
+                                 alt="Cadebot the waiter in the dining area" 
+                                 class="rounded-sm w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/600x400/1a1a1a/D4AF37?text=Cadebot'">
+                        </div>
+                        <h3 class="font-serif text-3xl font-bold text-amber-500 mb-2">Cadebot</h3>
+                        <p class="text-lg font-semibold text-white mb-4">Precision and Grace</p>
+                        <p class="text-gray-300 leading-relaxed">Our Cadebot waiters glide through the restaurant, delivering your meals with futuristic precision. It’s a captivating display of technology that adds a touch of magic to your meal.</p>
+                    </div>
+                    <div class="bg-neutral-800/50 p-8 rounded-sm">
+                        <div class="h-96 w-full mb-6">
+                             <img src="https://placehold.co/800x600/1a1a1a/D4AF37?text=Robot+Anno+Barista" 
+                                  alt="Robot Anno the barista machine" 
+                                  class="rounded-sm w-full h-full object-cover" 
+                                  onerror="this.src='https://placehold.co/600x400/1a1a1a/D4AF37?text=Robot+Anno'">
+                        </div>
+                        <h3 class="font-serif text-3xl font-bold text-amber-500 mb-2">Robot Anno</h3>
+                        <p class="text-lg font-semibold text-white mb-4">The Artisan Barista</p>
+                        <p class="text-gray-300 leading-relaxed">Begin your day with a masterpiece. Our Robot Anno barista crafts the perfect coffee, from grinding the beans to creating intricate latte art, ensuring excellence in every cup.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservations Section -->
+        <div id="book" class="py-24 px-4 bg-black">
+            <!-- Success Message (Hidden by default) -->
+            <div id="success-message" class="hidden flex items-center justify-center">
+                <div class="max-w-lg mx-auto text-center bg-neutral-900 p-12 rounded-sm">
+                    <h2 class="font-serif text-4xl font-bold text-amber-500 mb-4">Thank You!</h2>
+                    <p class="text-white text-lg">Your booking request has been received. We will contact you shortly to confirm.</p>
+                    <button onclick="resetForm()" class="mt-8 bg-amber-600 text-white font-semibold py-3 px-8 rounded-sm hover:bg-amber-500 transition-colors duration-300">
+                        Make Another Booking
+                    </button>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div id="booking-form-container" class="max-w-lg mx-auto bg-neutral-900 p-10 rounded-sm shadow-2xl">
+                <h2 class="font-serif text-5xl font-bold text-white text-center mb-8">Book A Table</h2>
+                <form onsubmit="handleBooking(event)" class="space-y-6">
+                     <div>
+                        <label htmlFor="name" class="block text-sm font-medium text-amber-400">Full Name</label>
+                        <input type="text" name="name" id="name" required class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                     <div>
+                        <label htmlFor="phone" class="block text-sm font-medium text-amber-400">Phone</label>
+                        <input type="tel" name="phone" id="phone" required class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                     <div class="grid grid-cols-2 gap-6">
+                         <div>
+                            <label htmlFor="guests" class="block text-sm font-medium text-amber-400">Guests</label>
+                            <select name="guests" id="guests" class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                               <option>1 guest</option>
+                               <option selected>2 guests</option>
+                               <option>3 guests</option>
+                               <option>4 guests</option>
+                               <option>5 guests</option>
+                               <option>6 guests</option>
+                               <option>7 guests</option>
+                               <option>8 guests</option>
+                               <option>9 guests</option>
+                               <option>10 guests</option>
+                            </select>
+                        </div>
+                         <div>
+                            <label htmlFor="date" class="block text-sm font-medium text-amber-400">Date</label>
+                            <input type="date" name="date" id="date" required class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        </div>
+                     </div>
+                     <div>
+                        <label htmlFor="time" class="block text-sm font-medium text-amber-400">Time</label>
+                         <select name="time" id="time" class="mt-1 block w-full bg-neutral-800 border-neutral-700 rounded-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-amber-500">
+                             <option>5:00 PM</option>
+                             <option>5:30 PM</option>
+                             <option selected>6:00 PM</option>
+                             <option>6:30 PM</option>
+                             <option>7:00 PM</option>
+                             <option>7:30 PM</option>
+                             <option>8:00 PM</option>
+                             <option>8:30 PM</option>
+                         </select>
+                     </div>
+                     <div>
+                        <button type="submit" class="w-full bg-amber-600 text-white font-bold py-3 px-4 rounded-sm hover:bg-amber-500 transition-colors duration-300 text-lg">
+                            Request Booking
+                        </button>
+                     </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t-2 border-amber-500/20">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+            <div class="flex justify-center mb-6">
+                <!-- SVG Logo -->
+                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 95C74.8528 95 95 74.8528 95 50C95 25.1472 74.8528 5 50 5C25.1472 5 5 25.1472 5 50C5 74.8528 25.1472 95 50 95Z" stroke="#D4AF37" stroke-width="2"/>
+                    <circle cx="40" cy="45" r="3" fill="#D4AF37"/>
+                    <circle cx="60" cy="45" r="3" fill="#D4AF37"/>
+                    <path d="M45 65C50 70 55 65" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M42 35H58" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M50 35V60" stroke="#E0E0E0" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <p class="font-serif text-3xl text-white mb-4">Tease Robot Cafe, Bar & Eatery</p>
+            <p class="text-lg">Shop 5, 20 Conical Hill Road, Hanmer Springs</p>
+            <p class="text-lg mb-6">Phone: <a href="tel:03-315-7032" class="hover:text-amber-500">03-315 7032</a></p>
+            <div class="mb-6">
+                <p class="font-bold text-amber-400 text-lg">Hours</p>
+                <p>Cafe: 9am - 3pm</p>
+                <p>Lunch: 11am - 3pm</p>
+                <p>Dinner: 5pm - Late</p>
+            </div>
+            <p class="mt-10 text-sm" id="copyright"></p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Set dynamic year
+        document.getElementById('copyright').innerHTML = `&copy; ${new Date().getFullYear()} Tease Robot Cafe, Bar & Eatery. All Rights Reserved.`;
+
+        // Set Date input min attribute to today
+        document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            
+            menu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        // Handle Booking Form (Client-Side Simulation)
+        function handleBooking(e) {
+            e.preventDefault();
+            const formContainer = document.getElementById('booking-form-container');
+            const successMessage = document.getElementById('success-message');
+            
+            formContainer.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+        }
+
+        function resetForm() {
+            const formContainer = document.getElementById('booking-form-container');
+            const successMessage = document.getElementById('success-message');
+            
+            // Reset the actual form fields
+            document.querySelector('form').reset();
+            
+            successMessage.classList.add('hidden');
+            formContainer.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
